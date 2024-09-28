@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+
+      <script>
+
+          
+class Product {
+    constructor(produit, name, price) {
+        this.produit = produit;
+        this.name = name;
+        this.price = price;
+    }
+}
+
+
+class ShoppingCartItem {
+    constructor(product, quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    totalPrice() {
+        return this.product.price * this.quantity;
+    }
+}
+
+
+class ShoppingCart {
+    constructor() {
+        this.items = [];
+    }
+
+    addItem(product, quantity) {
+        this.items.push(new ShoppingCartItem(product, quantity));
+    }
+
+    removeItem(productId) {
+        this.items = this.items.filter(item => item.product.productId !== productId);
+    }
+
+    totalItems() {
+        return this.items.length;
+    }
+
+    displayCart() {
+        this.items.forEach(item => {
+            console.log(`Product: ${item.product.name}, Quantity: ${item.quantity}, Total Price: ${item.totalPrice()}`);
+        });
+    }
+
+    totalCartPrice() {
+        return this.items.reduce((total, item) => total + item.totalPrice(), 0);
+    }
+}
+
+
+const product1 = new Product(1, "chaussure", 1000);
+const product2 = new Product(2, "chaussette", 50);
+
+
+const cart = new ShoppingCart();
+
+
+cart.addItem(product1, 2);
+cart.addItem(product2, 3);
+
+cart.displayCart();
+
+cart.removeItem(1);
+
+cart.displayCart();
+
+
+console.log(`Total items in cart: ${cart.totalItems()}`);
+
+
+console.log(`Total cart price: ${cart.totalCartPrice()}`);
+
+      </script>
+  </body>
+</html>
